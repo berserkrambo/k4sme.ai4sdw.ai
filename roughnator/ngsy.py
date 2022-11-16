@@ -95,7 +95,6 @@ ae=None, HB=None, geom=None, Ra=FloatAttr(type='Number', value=3.3))]
 """
 
 from fipy.ngsi.entity import BaseEntity, FloatAttr, TextAttr, Attr
-from pydantic import BaseModel
 from typing import Optional
 
 class ListAttr(Attr):
@@ -107,116 +106,9 @@ class MachineEntity(BaseEntity):
     type = 'Machine'
     bbox: Optional[TextAttr]
 
-# class MachineEntity(BaseEntity):
-#     type = 'Machine'
-#     bbox: Optional[ListAttr]
-
-# class MachineEntity(BaseEntity):
-#     type = 'Machine'
-#     x1: Optional[FloatAttr]
-#     y1: Optional[FloatAttr]
-#     x2: Optional[FloatAttr]
-#     y2: Optional[FloatAttr]
-
-
 
 class RoughnessEstimateEntity(BaseEntity):
     type = 'RoughnessEstimate'
     acceleration: FloatAttr
     roughness: FloatAttr
 
-
-# class RawReading(BaseModel):
-#     bbox: Optional[float]
-#     mask: Optional[float]
-#     x2: Optional[float]
-#     y2: Optional[float]
-#
-#
-#     def to_machine_entity(self, entity_id) -> MachineEntity:
-#         e = MachineEntity(id=entity_id)
-#
-#         e.x1 = FloatAttr.new(self.x1)
-#         e.y1 = FloatAttr.new(self.y1)
-#         e.x2 = FloatAttr.new(self.x2)
-#         e.y2 = FloatAttr.new(self.y2)
-#
-#
-#         return e
-
-
-
-# class MachineEntity(BaseEntity):
-#     type = 'Machine'
-#     AcelR: Optional[FloatAttr]
-#     fz: Optional[FloatAttr]
-#     Diam: Optional[FloatAttr]
-#     ae: Optional[FloatAttr]
-#     HB: Optional[FloatAttr]
-#     geom: Optional[FloatAttr]
-#     Ra: Optional[FloatAttr]
-#
-#
-# class RoughnessEstimateEntity(BaseEntity):
-#     type = 'RoughnessEstimate'
-#     acceleration: FloatAttr
-#     roughness: FloatAttr
-#
-#
-# class RawReading(BaseModel):
-#     AcelR: Optional[float]
-#     fz: Optional[float]
-#     Diam: Optional[float]
-#     ae: Optional[float]
-#     HB: Optional[float]
-#     geom: Optional[float]
-#     Ra: Optional[float]
-#
-#     def to_machine_entity(self, entity_id) -> MachineEntity:
-#         e = MachineEntity(id=entity_id)
-#
-#         e.AcelR = FloatAttr.new(self.AcelR)
-#         e.fz = FloatAttr.new(self.fz)
-#         e.Diam = FloatAttr.new(self.Diam)
-#         e.ae = FloatAttr.new(self.ae)
-#         e.HB = FloatAttr.new(self.HB)
-#         e.geom = FloatAttr.new(self.geom)
-#         e.Ra = FloatAttr.new(self.Ra)
-#
-#         return e
-
-
-# print(FloatAttr.from_value(2.3).json())
-# print(TextAttr.from_value('hi'))
-#
-# foo = BaseEntity.parse_raw('{"id": "1", "type": "foo", "x": 3}')
-# print(foo)
-#
-# machine1 = MachineEntity(id='').set_id_with_type_prefix('1')
-# print(machine1)
-# print(machine1.to_json())
-#
-# sensors_data = {"AcelR": 1, "fz": 2, "Diam": 4, "ae": 5, "HB": 6, "geom": 10,
-#                 "Ra": 11}
-# rr = RawReading(**sensors_data)
-# print(rr)
-# print(rr.to_machine_entity(entity_id=machine1.id).to_json())
-#
-# rr = RawReading(AcelR=1, Ra=11)
-# print(rr)
-# print(rr.to_machine_entity(entity_id=machine1.id).to_json())
-#
-# ai = RoughnessEstimateEntity(
-#     id=machine1.id,
-#     acceleration=FloatAttr.from_value(2.3),
-#     roughness=FloatAttr.from_value(4.5))
-# print(ai.json())
-#
-# notification = EntityUpdateNotification(
-#     data=[
-#         {"id": "1", "type": "Machine", "Ra": {"value": 1.1}},
-#         {"id": "2", "type": "NotMe", "Ra": {"value": 2.2}},
-#         {"id": "3", "type": "Machine", "Ra": {"value": 3.3}}
-#     ]
-# )
-# print(notification.filter_entities(MachineEntity))
