@@ -10,11 +10,11 @@ from uri import URI
 
 TENANT = 'csic'
 ORION_EXTERNAL_BASE_URL = 'http://localhost:1026'
-ROUGHNATOR_INTERNAL_BASE_URL = 'http://rgh:8000'
+ROUGHNATOR_INTERNAL_BASE_URL = 'http://roughnator:8000'
 QUANTUMLEAP_INTERNAL_BASE_URL = 'http://quantumleap:8668'
 QUANTUMLEAP_EXTERNAL_BASE_URL = 'http://localhost:8668'
 ROUGHNATOR_SUB = {
-    "description": "Notify RGH of changes to any entity.",
+    "description": "Notify roughnator of changes to any entity.",
     "subject": {
         "entities": [
             {
