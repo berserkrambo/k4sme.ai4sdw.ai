@@ -94,20 +94,30 @@ ae=None, HB=None, geom=None, Ra=FloatAttr(type='Number', value=3.3))]
 
 """
 
-from fipy.ngsi.entity import BaseEntity, FloatAttr
+from fipy.ngsi.entity import BaseEntity, FloatAttr, TextAttr, Attr
 from pydantic import BaseModel
 from typing import Optional
+
+class ListAttr(Attr):
+    type = 'List'
+    value: list
 
 
 class MachineEntity(BaseEntity):
     type = 'Machine'
-    AcelR: Optional[FloatAttr]
-    fz: Optional[FloatAttr]
-    Diam: Optional[FloatAttr]
-    ae: Optional[FloatAttr]
-    HB: Optional[FloatAttr]
-    geom: Optional[FloatAttr]
-    Ra: Optional[FloatAttr]
+    bbox: Optional[TextAttr]
+
+# class MachineEntity(BaseEntity):
+#     type = 'Machine'
+#     bbox: Optional[ListAttr]
+
+# class MachineEntity(BaseEntity):
+#     type = 'Machine'
+#     x1: Optional[FloatAttr]
+#     y1: Optional[FloatAttr]
+#     x2: Optional[FloatAttr]
+#     y2: Optional[FloatAttr]
+
 
 
 class RoughnessEstimateEntity(BaseEntity):
@@ -116,27 +126,64 @@ class RoughnessEstimateEntity(BaseEntity):
     roughness: FloatAttr
 
 
-class RawReading(BaseModel):
-    AcelR: Optional[float]
-    fz: Optional[float]
-    Diam: Optional[float]
-    ae: Optional[float]
-    HB: Optional[float]
-    geom: Optional[float]
-    Ra: Optional[float]
+# class RawReading(BaseModel):
+#     bbox: Optional[float]
+#     mask: Optional[float]
+#     x2: Optional[float]
+#     y2: Optional[float]
+#
+#
+#     def to_machine_entity(self, entity_id) -> MachineEntity:
+#         e = MachineEntity(id=entity_id)
+#
+#         e.x1 = FloatAttr.new(self.x1)
+#         e.y1 = FloatAttr.new(self.y1)
+#         e.x2 = FloatAttr.new(self.x2)
+#         e.y2 = FloatAttr.new(self.y2)
+#
+#
+#         return e
 
-    def to_machine_entity(self, entity_id) -> MachineEntity:
-        e = MachineEntity(id=entity_id)
 
-        e.AcelR = FloatAttr.new(self.AcelR)
-        e.fz = FloatAttr.new(self.fz)
-        e.Diam = FloatAttr.new(self.Diam)
-        e.ae = FloatAttr.new(self.ae)
-        e.HB = FloatAttr.new(self.HB)
-        e.geom = FloatAttr.new(self.geom)
-        e.Ra = FloatAttr.new(self.Ra)
 
-        return e
+# class MachineEntity(BaseEntity):
+#     type = 'Machine'
+#     AcelR: Optional[FloatAttr]
+#     fz: Optional[FloatAttr]
+#     Diam: Optional[FloatAttr]
+#     ae: Optional[FloatAttr]
+#     HB: Optional[FloatAttr]
+#     geom: Optional[FloatAttr]
+#     Ra: Optional[FloatAttr]
+#
+#
+# class RoughnessEstimateEntity(BaseEntity):
+#     type = 'RoughnessEstimate'
+#     acceleration: FloatAttr
+#     roughness: FloatAttr
+#
+#
+# class RawReading(BaseModel):
+#     AcelR: Optional[float]
+#     fz: Optional[float]
+#     Diam: Optional[float]
+#     ae: Optional[float]
+#     HB: Optional[float]
+#     geom: Optional[float]
+#     Ra: Optional[float]
+#
+#     def to_machine_entity(self, entity_id) -> MachineEntity:
+#         e = MachineEntity(id=entity_id)
+#
+#         e.AcelR = FloatAttr.new(self.AcelR)
+#         e.fz = FloatAttr.new(self.fz)
+#         e.Diam = FloatAttr.new(self.Diam)
+#         e.ae = FloatAttr.new(self.ae)
+#         e.HB = FloatAttr.new(self.HB)
+#         e.geom = FloatAttr.new(self.geom)
+#         e.Ra = FloatAttr.new(self.Ra)
+#
+#         return e
 
 
 # print(FloatAttr.from_value(2.3).json())
