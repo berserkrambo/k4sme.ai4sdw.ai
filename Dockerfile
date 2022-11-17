@@ -9,7 +9,6 @@ RUN poetry config virtualenvs.create false \
   && poetry install --no-dev --no-interaction --no-ansi
 
 COPY roughnator /src/roughnator
-COPY data /src/data
 
 ENV PYTHONPATH=$PWD:$PYTHONPATH
 
