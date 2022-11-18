@@ -16,14 +16,6 @@ def _format_mgs(lines: List[Any]) -> str:
 
 
 def info(msg: str):
-    # _logger().info(msg)
-    # TODO. ^ not printing anything to stdout. Figure out why.
-    # Have a look at:
-    # - uvicorn.main, uvicorn.config.LOGGING_CONFIG
-    # - https://github.com/tiangolo/uvicorn-gunicorn-fastapi-docker/issues/19
-    # - https://nuculabs.dev/2021/05/18/fastapi-uvicorn-logging-in-production/
-    # - https://stackoverflow.com/questions/66602480
-
     print(msg)
 
 
