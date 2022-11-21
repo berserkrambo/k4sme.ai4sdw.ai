@@ -25,5 +25,5 @@ def update_context(ctx: FiwareContext,
                    estimates: List[RoughnessEstimateEntity]):
     log.going_to_update_context_with_estimates(ctx, estimates)
 
-    orion = OrionClient('10.152.183.232:1026', ctx)
+    orion = OrionClient(config.orion_base_url(), ctx)
     orion.upsert_entities(estimates)

@@ -36,7 +36,6 @@ def send_machine_entities():
     url = 'http://localhost:1026/v2/op/update'
     headers = {"Content-Type": "application/json", "fiware-service": "csic"}
     x = post(url, json=myobj, headers=headers)
-    print(x.text)
     time.sleep(5)
 
 def run():
