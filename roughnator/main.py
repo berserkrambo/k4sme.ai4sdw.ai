@@ -10,16 +10,13 @@ from roughnator.ngsy import MachineEntity
 
 app = FastAPI()
 
-
 @app.get('/')
 def read_root():
     return {'roughnator': __version__}
 
-
 @app.get("/version")
 def read_version():
     return read_root()
-
 
 @app.post("/updates")
 def post_updates(notification: EntityUpdateNotification,
