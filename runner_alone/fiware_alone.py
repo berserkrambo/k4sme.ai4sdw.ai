@@ -1,18 +1,15 @@
-from fipy.http.jclient import JsonClient
 from fipy.ngsi.headers import FiwareContext
 from fipy.ngsi.orion import OrionClient
-from fipy.ngsi.quantumleap import QuantumLeapClient
-from fipy.wait import wait_for_orion, wait_for_quantumleap
+from fipy.wait import wait_for_orion
 import json
 from typing import List, Optional
 from uri import URI
 
 
 TENANT = 'csic'
-ORION_EXTERNAL_BASE_URL = 'http://localhost:1026'
+ORION_EXTERNAL_BASE_URL = 'http://orion:1026'
 ROUGHNATOR_INTERNAL_BASE_URL = 'http://rgh:8000'
 QUANTUMLEAP_INTERNAL_BASE_URL = 'http://quantumleap:8668'
-QUANTUMLEAP_EXTERNAL_BASE_URL = 'http://localhost:8668'
 ROUGHNATOR_SUB = {
     "description": "Notify roughnator of changes to any entity.",
     "subject": {
@@ -48,12 +45,14 @@ QUANTUMLEAP_SUB = {
 def orion_client(service_path: Optional[str] = None,
                  correlator: Optional[str] = None) -> OrionClient:
     base_url = URI(ORION_EXTERNAL_BASE_URL)
+    print(f"orion base url {base_url}")
     ctx = FiwareContext(service=TENANT, service_path=service_path,
                         correlator=correlator)
     return OrionClient(base_url, ctx)
 
 
 def wait_on_orion():
+    print(f"wait orion client {orion_client()}")
     wait_for_orion(orion_client())
 
 
@@ -106,16 +105,3 @@ def create_subscriptions():
 
     print("Current subscriptions in Orion:")
     print(formatted)
-
-
-def quantumleap_client() -> QuantumLeapClient:
-    base_url = URI(QUANTUMLEAP_EXTERNAL_BASE_URL)
-    ctx = FiwareContext(service=TENANT, service_path='/')  # (*)
-    return QuantumLeapClient(base_url, ctx)
-# NOTE. Orion handling of empty service path. We send Orion entities w/ no
-# service path in our tests. But when Orion notifies QL, it sends along a
-# root service path. So we add it to the context to make queries work.
-
-
-def wait_on_quantumleap():
-    wait_for_quantumleap(quantumleap_client())
