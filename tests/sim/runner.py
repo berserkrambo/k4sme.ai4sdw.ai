@@ -16,14 +16,14 @@ def bootstrap():
     wait_on_orion()
 
     create_subscriptions()
-
+    print("sub created")
 
 def send_machine_entities():
     # sampler = MachineSampler(pool_size=1)
     # sampler.sample(samples_n=1, sampling_rate=5)
     # print(sampler.make_device_entity(1))
 
-
+    print("start sending entities")
     n = random.randint(0, 10)
     boxes = ""
     for i in range(n):
@@ -34,7 +34,7 @@ def send_machine_entities():
 
     myobj = {'entities': [{'id': 'urn:ngsi-ld:Machine:1', 'type': 'Machine', 'bbox': {'type': 'Text', 'value': boxes}}], 'actionType': 'append'}
     url = 'http://localhost:1026/v2/op/update'
-    headers = {"Content-Type": "application/json", "fiware-service": "csic"}
+    headers = {"Content-Type": "application/json", "fiware-service": "ai4sdw"}
     x = post(url, json=myobj, headers=headers)
     time.sleep(5)
 

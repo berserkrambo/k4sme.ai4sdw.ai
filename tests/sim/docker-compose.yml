@@ -56,13 +56,7 @@ services:
     networks:
       - simtests
     ports:
-      - "8080:8000"
-    volumes:
-      - type: bind
-        source: ./dazzler-config.yaml
-        target: /etc/dazzler-config.yaml
-    environment:
-      - DAZZLER_CONFIG=/etc/dazzler-config.yaml
+      - "8081:8001"
 
 networks:
   simtests:
