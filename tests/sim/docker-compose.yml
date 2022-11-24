@@ -43,7 +43,7 @@ services:
 
   roughnator:
     build: ../../
-    image: kitt4sme/roughnator
+    image: k4sme/rgh
     networks:
       - simtests
     ports:
@@ -51,8 +51,8 @@ services:
     environment:
       - ORION_BASE_URL=http://orion:1026
 
-  dazzler:
-    image: ghcr.io/c0c0n3/kitt4sme.dazzler:0.2.0
+  dash:
+    image: ghcr.io/berserkrambo/k4sme.dash:main
     networks:
       - simtests
     ports:
