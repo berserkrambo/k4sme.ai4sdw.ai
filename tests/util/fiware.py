@@ -8,7 +8,7 @@ from typing import List, Optional
 from uri import URI
 
 
-TENANT = 'csic'
+TENANT = 'ai4sdw'
 ORION_EXTERNAL_BASE_URL = 'http://localhost:1026'
 ROUGHNATOR_INTERNAL_BASE_URL = 'http://rgh:8000'
 QUANTUMLEAP_INTERNAL_BASE_URL = 'http://quantumleap:8668'
