@@ -3,10 +3,10 @@ from fipy.ngsi.headers import FiwareContext
 from fastapi import FastAPI, Header
 from typing import Optional
 
-from roughnator import __version__
-from roughnator.enteater import process_update
-import roughnator.log as log
-from roughnator.ngsy import MachineEntity
+from ai4sdw import __version__
+from ai4sdw.enteater import process_update
+import ai4sdw.log as log
+from ai4sdw.ngsy import WorkerEntity
 
 app = FastAPI()
 
@@ -30,6 +30,6 @@ def post_updates(notification: EntityUpdateNotification,
 
     log.received_ngsi_entity_update(ctx, notification)
 
-    updated_machines = notification.filter_entities(MachineEntity)
+    updated_machines = notification.filter_entities(WorkerEntity)
     if updated_machines:
         process_update(ctx, updated_machines)

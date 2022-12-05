@@ -3,7 +3,7 @@ from fipy.ngsi.headers import FiwareContext
 import logging
 from typing import Any, List
 
-from roughnator.ngsy import MachineEntity, RoughnessEstimateEntity
+from ai4sdw.ngsy import WorkerEntity
 
 
 def _logger() -> logging.Logger:
@@ -26,14 +26,14 @@ def received_ngsi_entity_update(ctx: FiwareContext,
     info(msg)
 
 
-def going_to_process_updates(ctx: FiwareContext, ms: List[MachineEntity]):
+def going_to_process_updates(ctx: FiwareContext, ms: List[WorkerEntity]):
     header = f"going to process updates for {ctx}:"
     msg = _format_mgs([header] + ms)
     info(msg)
 
 
 def going_to_update_context_with_estimates(ctx: FiwareContext,
-                                           rs: List[RoughnessEstimateEntity]):
+                                           rs):
     header = f"going to update context ({ctx}) with estimates:"
     msg = _format_mgs([header] + rs)
     info(msg)
