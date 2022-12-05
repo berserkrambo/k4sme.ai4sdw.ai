@@ -41,7 +41,7 @@ services:
       - CACHE_QUERIES=False
       - LOGLEVEL=DEBUG
 
-  roughnator:
+  ai4sdw:
     build: ../../
     image: k4sme/ai4sdw
     networks:

@@ -12,7 +12,7 @@ app = FastAPI()
 
 @app.get('/')
 def read_root():
-    return {'rgh': __version__}
+    return {'ai4sdw': __version__}
 
 @app.get("/version")
 def read_version():
