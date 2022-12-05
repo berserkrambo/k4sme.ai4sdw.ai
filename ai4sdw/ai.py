@@ -43,30 +43,29 @@ def points_to_3d_hom(bottom_center_bbox, h_matrix):
     return apply_homography(point2d=bottom_center_bbox, homograpty_matrix=h_matrix)
 
 
-def get_services(entities):
+def get_services(entity):
     """
-    :param entities: WorkerEntity List
+    :param entity: WorkerEntity
     :return: List of AI services
     """
     out_pred = []
 
-    for e in entities:
-        center_points = np.asarray(e.centers.value, dtype='float').reshape((-1, 1, 2))
-        poses = np.asarray(e.poses.value, dtype='float').reshape((-1, 17, 2))
-        res_fall_det = FallDetector().predict(poses=poses, worker=e)
+    center_points = np.asarray(entity.centers.value, dtype='float').reshape((-1, 1, 2))
+    poses = np.asarray(entity.poses.value, dtype='float').reshape((-1, 17, 2))
+    res_fall_det = FallDetector().predict(poses=poses, worker=entity)
 
-        h_matrix = get_homograpty_matrix(np.asarray(e.src_points.value, dtype='float').reshape((-1, 1, 2)),
-                                          np.asarray(e.dst_points.value, dtype='float').reshape((-1, 1, 2)))
-        center_points_to_plan = points_to_3d_hom(center_points, h_matrix)
-        area_points_to_plan = points_to_3d_hom(np.asarray(e.warning_area.value, dtype='float').reshape((-1, 1, 2)), h_matrix)
-        res_nonwalk_area = in_hull(center_points_to_plan, polygon=area_points_to_plan, worker=e)
+    h_matrix = get_homograpty_matrix(np.asarray(entity.src_points.value, dtype='float').reshape((-1, 1, 2)),
+                                      np.asarray(entity.dst_points.value, dtype='float').reshape((-1, 1, 2)))
+    center_points_to_plan = points_to_3d_hom(center_points, h_matrix)
+    area_points_to_plan = points_to_3d_hom(np.asarray(entity.warning_area.value, dtype='float').reshape((-1, 1, 2)), h_matrix)
+    res_nonwalk_area = in_hull(center_points_to_plan, polygon=area_points_to_plan, worker=entity)
 
-        eta,beta,tau = e.e_b_t.value
-        res_distances = get_distance_level(center_points_to_plan, eta, beta, tau, e.area_capacity.value, e)
+    eta,beta,tau = entity.e_b_t.value
+    res_distances = get_distance_level(center_points_to_plan, eta, beta, tau, entity.area_capacity.value, entity)
 
-        out_pred.extend([res_fall_det])
-        out_pred.extend([res_nonwalk_area])
-        out_pred.extend([res_distances])
+    out_pred.extend([res_fall_det])
+    out_pred.extend([res_nonwalk_area])
+    out_pred.extend([res_distances])
 
     return out_pred
 

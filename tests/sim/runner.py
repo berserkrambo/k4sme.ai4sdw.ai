@@ -21,7 +21,7 @@ def send_machine_entities():
     print("sending entities")
 
     sampler = MachineSampler(pool_size=1)
-    sampler.sample(samples_n=1, sampling_rate=5)
+    sampler.sample(samples_n=1, sampling_rate=30)
     print(sampler.make_device_entity(1))
 
 
