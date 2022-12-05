@@ -25,11 +25,8 @@ class MachineSampler(DevicePoolSampler):
         # boxes = ""
         boxes = []
         pose = []
-        area = []
 
         random.seed(time.time())
-        for ai in range(4 * 2):
-            area.append(random.randint(0, 100))
 
         frame = np.zeros(shape=(640,640,3), dtype=np.uint8)
         retval, buffer = cv2.imencode('.jpg', frame)
@@ -48,7 +45,7 @@ class MachineSampler(DevicePoolSampler):
 
         return WorkerEntity(
             id='',
-            warning_area=ArrayAttr.new(area),
+            warning_area=ArrayAttr.new([20,20,60,20,20,0,60,0]),
             num_obj=FloatAttr.new(n),
             centers=ArrayAttr.new(boxes),
             poses=ArrayAttr.new(pose),
