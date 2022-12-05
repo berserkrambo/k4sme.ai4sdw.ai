@@ -4,6 +4,8 @@ import cv2
 from ai4sdw.fall_detector.detect import FallDetector
 from ai4sdw.line_crossing.detect import in_hull
 from ai4sdw.pandemic_monitoring.detect import get_distance_level
+from ai4sdw.ngsy import AI4SDW_services
+from fipy.ngsi.entity import BoolAttr, FloatAttr
 
 
 def get_homograpty_matrix(src_points, dst_points):
@@ -48,26 +50,20 @@ def get_services(entity):
     :param entity: WorkerEntity
     :return: List of AI services
     """
-    out_pred = []
 
     center_points = np.asarray(entity.centers.value, dtype='float').reshape((-1, 1, 2))
     poses = np.asarray(entity.poses.value, dtype='float').reshape((-1, 17, 2))
     res_fall_det = FallDetector().predict(poses=poses, worker=entity)
 
     h_matrix = get_homograpty_matrix(np.asarray(entity.src_points.value, dtype='float').reshape((-1, 1, 2)),
-                                      np.asarray(entity.dst_points.value, dtype='float').reshape((-1, 1, 2)))
+                                     np.asarray(entity.dst_points.value, dtype='float').reshape((-1, 1, 2)))
     center_points_to_plan = points_to_3d_hom(center_points, h_matrix)
-    area_points_to_plan = points_to_3d_hom(np.asarray(entity.warning_area.value, dtype='float').reshape((-1, 1, 2)), h_matrix)
+    area_points_to_plan = points_to_3d_hom(np.asarray(entity.warning_area.value, dtype='float').reshape((-1, 1, 2)),
+                                           h_matrix)
     res_nonwalk_area = in_hull(center_points_to_plan, polygon=area_points_to_plan, worker=entity)
 
-    eta,beta,tau = entity.e_b_t.value
+    eta, beta, tau = entity.e_b_t.value
     res_distances = get_distance_level(center_points_to_plan, eta, beta, tau, entity.area_capacity.value, entity)
 
-    out_pred.extend([res_fall_det])
-    out_pred.extend([res_nonwalk_area])
-    out_pred.extend([res_distances])
-
-    return out_pred
-
-
-
+    return AI4SDW_services(id=entity.id, area_crossed=BoolAttr.new(res_nonwalk_area),
+                           fall_pred=BoolAttr.new(res_fall_det), risk_leve=FloatAttr.new(res_distances))

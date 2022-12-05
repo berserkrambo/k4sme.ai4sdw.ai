@@ -24,14 +24,8 @@ class WorkerEntity(BaseEntity):
     service_type:Optional[ TextAttr]
     # frame: ArrayAttr
 
-class LineCrossing(BaseEntity):
-    type = 'ai4sdw_LineCrossing_service'
-    status: BoolAttr
-
-class FallDetection(BaseEntity):
-    type = 'ai4sdw_FallDetection_service'
-    status: BoolAttr
-
-class PandemicMonitoring(BaseEntity):
-    type = 'ai4sdw_PandemicMonitoring_service'
-    status: FloatAttr
+class AI4SDW_services(BaseEntity):
+    type = 'ai4sdw_service'
+    area_crossed: Optional[BoolAttr]
+    fall_pred: Optional[BoolAttr]
+    risk_leve: Optional[FloatAttr]

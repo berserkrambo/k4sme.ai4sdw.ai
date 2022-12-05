@@ -17,13 +17,15 @@ from ai4sdw.ai import get_services
 
 def process_update(ctx: FiwareContext, we: List[WorkerEntity]):
     log.going_to_process_updates(ctx, we)
+    print("pre stimationnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
     estimates = [get_services(e) for e in we]
     update_context(ctx, estimates)
-
+    print("stime fatte")
 
 def update_context(ctx: FiwareContext,
                    estimates):
     log.going_to_update_context_with_estimates(ctx, estimates)
 
+    print("preparo aggiornamento Orion")
     orion = OrionClient(config.orion_base_url(), ctx)
     orion.upsert_entities(estimates)

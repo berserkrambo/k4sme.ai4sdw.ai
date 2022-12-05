@@ -20,7 +20,7 @@ class MachineSampler(DevicePoolSampler):
 
     def new_device_entity(self) -> WorkerEntity:
         random.seed(time.time())
-        n = random.randint(0,10)
+        n = random.randint(1,10)
 
         # boxes = ""
         boxes = []

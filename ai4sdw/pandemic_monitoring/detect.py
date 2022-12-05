@@ -1,5 +1,4 @@
 import numpy as np
-from ai4sdw.ngsy import PandemicMonitoring, FloatAttr
 
 def get_distance_matrix(center_points_plan):
     number_of_peds = len(center_points_plan)
@@ -56,5 +55,6 @@ def get_distance_level(center_points, eta, beta, tau, area_capacity, worker):
     )
     global_risk = get_global_risk(individual_risks, capacity=area_capacity) * 100
 
-    return PandemicMonitoring(id=worker.id, status=FloatAttr.new(global_risk))
+    # return PandemicMonitoring(id=worker.id, status=FloatAttr.new(global_risk))
+    return global_risk
 

@@ -1,7 +1,6 @@
 import torch
 import numpy as np
 from torch import nn
-from ai4sdw.ngsy import FallDetection
 from fipy.ngsi.entity import BoolAttr
 from path import Path
 
@@ -71,5 +70,7 @@ class FallDetector:
 
                 pred_label = np.argmax(y.cpu().numpy(), axis=1)
 
-        return FallDetection(id=worker.id,
-                             status=BoolAttr.new(True if any([lbl == 2 for lbl in pred_label]) else False))
+        # return FallDetection(id=worker.id,
+        #                      status=BoolAttr.new(True if any([lbl == 2 for lbl in pred_label]) else False))
+
+        return True if any([lbl == 2 for lbl in pred_label]) else False
