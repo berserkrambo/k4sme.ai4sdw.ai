@@ -52,8 +52,10 @@ def get_services(entity):
     """
 
     center_points = np.asarray(entity.centers.value, dtype='float').reshape((-1, 1, 2))
+
     poses = np.asarray(entity.poses.value, dtype='float').reshape((-1, 17, 2))
-    res_fall_det = FallDetector().predict(poses=poses, worker=entity)
+    fd = FallDetector()
+    res_fall_det = fd.predict(poses=poses, worker=entity)
 
     h_matrix = get_homograpty_matrix(np.asarray(entity.src_points.value, dtype='float').reshape((-1, 1, 2)),
                                      np.asarray(entity.dst_points.value, dtype='float').reshape((-1, 1, 2)))

@@ -73,4 +73,7 @@ class FallDetector:
         # return FallDetection(id=worker.id,
         #                      status=BoolAttr.new(True if any([lbl == 2 for lbl in pred_label]) else False))
 
-        return True if any([lbl == 2 for lbl in pred_label]) else False
+        # pred_label_str = [self.label_dict[pred] for pred in pred_label]
+        # print(any([lbl == 2 for lbl in pred_label]))
+
+        return any([lbl == 2 for lbl in pred_label])
