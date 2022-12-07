@@ -3,7 +3,6 @@ from fipy.ngsi.headers import FiwareContext
 from fastapi import FastAPI, Header
 from typing import Optional
 
-from ai4sdw import __version__
 from ai4sdw.enteater import process_update
 # import ai4sdw.log as log
 from ai4sdw.ngsy import WorkerEntity
@@ -11,12 +10,8 @@ from ai4sdw.ngsy import WorkerEntity
 app = FastAPI()
 
 @app.get('/')
-def read_root():
-    return {'ai4sdw': __version__}
-
-@app.get("/version")
-def read_version():
-    return read_root()
+def root():
+    return "ai4sdw"
 
 @app.post("/updates")
 def post_updates(notification: EntityUpdateNotification,
