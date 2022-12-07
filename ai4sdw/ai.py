@@ -5,7 +5,7 @@ from ai4sdw.fall_detector.detect import FallDetector
 from ai4sdw.line_crossing.detect import in_hull
 from ai4sdw.pandemic_monitoring.detect import get_distance_level
 from ai4sdw.ngsy import AI4SDW_services
-from fipy.ngsi.entity import BoolAttr, FloatAttr
+from fipy.ngsi.entity import FloatAttr
 
 
 def get_homograpty_matrix(src_points, dst_points):
@@ -67,5 +67,5 @@ def get_services(entity):
     eta, beta, tau = entity.e_b_t.value
     res_distances = get_distance_level(center_points_to_plan, eta, beta, tau, entity.area_capacity.value, entity)
 
-    return AI4SDW_services(id=entity.id, area_crossed=BoolAttr.new(res_nonwalk_area),
-                           fall_pred=BoolAttr.new(res_fall_det), risk_leve=FloatAttr.new(res_distances))
+    return AI4SDW_services(id=entity.id, area_crossed=FloatAttr.new(res_nonwalk_area),
+                           fall_pred=FloatAttr.new(res_fall_det), risk_leve=FloatAttr.new(res_distances))

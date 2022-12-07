@@ -14,5 +14,5 @@ COPY ai4sdw /src/ai4sdw
 
 ENV PYTHONPATH=$PWD:$PYTHONPATH
 
-EXPOSE 8000
-ENTRYPOINT ["uvicorn", "ai4sdw.main:app", "--host", "0.0.0.0", "--port", "8000"]
+EXPOSE 8082
+ENTRYPOINT ["uvicorn", "ai4sdw.main:app", "--host", "0.0.0.0", "--port", "8082"]
