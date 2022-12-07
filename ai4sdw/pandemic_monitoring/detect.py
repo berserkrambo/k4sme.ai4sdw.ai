@@ -55,6 +55,9 @@ def get_distance_level(center_points, eta, beta, tau, area_capacity, worker):
     )
     global_risk = get_global_risk(individual_risks, capacity=area_capacity) * 100
 
-    # return PandemicMonitoring(id=worker.id, status=FloatAttr.new(global_risk))
-    return global_risk
+    risk_table = [i*10 for i in range(11)]
+    risk_cmp = [np.linalg.norm(i*10 - global_risk) for i in range(11)]
+    id_cmp = np.argmin(risk_cmp)
+
+    return risk_table[id_cmp]
 

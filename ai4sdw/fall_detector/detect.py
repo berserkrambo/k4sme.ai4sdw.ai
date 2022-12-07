@@ -1,7 +1,6 @@
 import torch
 import numpy as np
 from torch import nn
-from fipy.ngsi.entity import BoolAttr
 from path import Path
 
 class LinearModel(nn.Module):
@@ -70,10 +69,5 @@ class FallDetector:
 
                 pred_label = np.argmax(y.cpu().numpy(), axis=1)
 
-        # return FallDetection(id=worker.id,
-        #                      status=BoolAttr.new(True if any([lbl == 2 for lbl in pred_label]) else False))
-
-        # pred_label_str = [self.label_dict[pred] for pred in pred_label]
-        # print(any([lbl == 2 for lbl in pred_label]))
-
-        return any([lbl == 2 for lbl in pred_label])
+        # return any([lbl == 2 for lbl in pred_label])
+        return np.asarray([lbl == 2 for lbl in pred_label]).sum()

@@ -85,5 +85,5 @@ def in_hull(points, polygon, worker):
     polygon = Polygon(coords_to_points(polygon))
     goods = [polygon.contains(Point(pi[0], pi[1])) for pi in points]
 
-    # return LineCrossing(id=worker.id, status=BoolAttr.new(True if len(goods) > 0 else False))
-    return any(goods)
+    # return any(goods)
+    return np.asarray(goods).sum()
