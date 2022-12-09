@@ -28,4 +28,4 @@ class AI4SDW_services(BaseEntity):
     type = 'ai4sdw_service'
     area_crossed: Optional[BoolAttr]
     fall_pred: Optional[BoolAttr]
-    risk_leve: Optional[FloatAttr]
+    risk_level: Optional[FloatAttr]
