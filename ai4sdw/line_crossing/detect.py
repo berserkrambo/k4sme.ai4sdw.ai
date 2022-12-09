@@ -85,5 +85,5 @@ def in_hull(points, polygon, worker):
     polygon = Polygon(coords_to_points(polygon))
     goods = [polygon.contains(Point(pi[0], pi[1])) for pi in points]
 
-    # return any(goods)
-    return np.asarray(goods).sum()
+    return any(goods)
+    # return np.asarray(goods).sum()
