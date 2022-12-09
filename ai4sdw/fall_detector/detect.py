@@ -69,5 +69,5 @@ class FallDetector:
 
                 pred_label = np.argmax(y.cpu().numpy(), axis=1)
 
-        return any([lbl == 2 for lbl in pred_label])
-        # return np.asarray([lbl == 2 for lbl in pred_label]).sum()
+        # return any([lbl == 2 for lbl in pred_label])
+        return np.asarray([lbl == 2 for lbl in pred_label]).sum()

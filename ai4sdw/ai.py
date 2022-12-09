@@ -67,5 +67,5 @@ def get_services(entity):
     eta, beta, tau = entity.e_b_t.value
     res_distances = get_distance_level(center_points_to_plan, eta, beta, tau, entity.area_capacity.value, entity)
 
-    return AI4SDW_services(id=entity.id, area_crossed=BoolAttr.new(res_nonwalk_area),
-                           fall_pred=BoolAttr.new(res_fall_det), risk_level=FloatAttr.new(res_distances))
+    return AI4SDW_services(id=entity.id, area_crossed=FloatAttr.new(res_nonwalk_area),
+                           fall_pred=FloatAttr.new(res_fall_det), risk_level=FloatAttr.new(res_distances))
