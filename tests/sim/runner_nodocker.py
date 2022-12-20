@@ -12,6 +12,5 @@ def send_machine_entities():
     # sampler.sample(samples_n=1, sampling_rate=30)
 
 
-
 if __name__ == '__main__':
     send_machine_entities()
