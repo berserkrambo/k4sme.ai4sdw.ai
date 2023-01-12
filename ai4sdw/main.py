@@ -4,7 +4,6 @@ from fastapi import FastAPI, Header
 from typing import Optional
 
 from ai4sdw.enteater import process_update
-# import ai4sdw.log as log
 from ai4sdw.ngsy import WorkerEntity
 
 app = FastAPI()
@@ -23,7 +22,7 @@ def post_updates(notification: EntityUpdateNotification,
         correlator=str(fiware_correlator)
     )
 
-    # log.received_ngsi_entity_update(ctx, notification)
+    print(f"Received data {ctx} - {notification}")
 
     updated_machines = notification.filter_entities(WorkerEntity)
     if updated_machines:
