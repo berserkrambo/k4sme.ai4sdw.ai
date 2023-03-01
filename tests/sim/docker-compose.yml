@@ -52,9 +52,7 @@ services:
       - ORION_BASE_URL=http://orion:1026
 
   dash:
-#    image: ghcr.io/berserkrambo/k4sme.dash:main
-    build: /home/rgasparini/Desktop/k4sme.dash
-    image: k4sme/dash
+    image: ghcr.io/berserkrambo/k4sme.dash:main
     networks:
       - simtests
     ports:
