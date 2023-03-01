@@ -54,6 +54,7 @@ def get_services(entity):
     center_points = np.asarray(entity.centers.value, dtype='float').reshape((-1, 1, 2))
 
     poses = np.asarray(entity.poses.value, dtype='float').reshape((-1, 17, 2))
+
     fd = FallDetector()
     res_fall_det = fd.predict(poses=poses, worker=entity)
 
@@ -62,6 +63,7 @@ def get_services(entity):
     center_points_to_plan = points_to_3d_hom(center_points, h_matrix)
     area_points_to_plan = points_to_3d_hom(np.asarray(entity.warning_area.value, dtype='float').reshape((-1, 1, 2)),
                                            h_matrix)
+
     res_nonwalk_area = in_hull(center_points_to_plan, polygon=area_points_to_plan, worker=entity)
 
     eta, beta, tau = entity.e_b_t.value

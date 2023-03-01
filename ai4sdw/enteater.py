@@ -15,8 +15,10 @@ from ai4sdw.ai import get_services
 
 
 def process_update(ctx: FiwareContext, we: List[WorkerEntity]):
-    estimates = [get_services(e) for e in we]
-    update_context(ctx, estimates)
+    estimates = [get_services(e) for e in we if len(e.centers.value) > 0]
+    if len(estimates) > 0:
+        update_context(ctx, estimates)
+
 
 def update_context(ctx: FiwareContext,
                    estimates):
